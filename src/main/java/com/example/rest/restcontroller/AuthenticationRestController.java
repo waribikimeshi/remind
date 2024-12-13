@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -106,8 +105,7 @@ public class AuthenticationRestController {
 	@ApiOperation(value = "認証マスタを１件検索する。")
 	@GetMapping(Consts.REST_URL_AUTHENTICATION_GET + Consts.REST_URL_PASSPARAMETER_ID)
 	@ResponseStatus(HttpStatus.OK)
-	public AuthenticationModel get(@PathVariable String id
-    		, Errors errors) throws Exception {
+	public AuthenticationModel get(@PathVariable String id) throws Exception {
 		logger.info("get開始");
 
 		AuthenticationModel model = new AuthenticationModel();
