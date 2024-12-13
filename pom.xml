@@ -128,6 +128,9 @@
 	
 
 	<build>
+		<!-- Parallel deploymentでのwarバージョン管理 -->
+		<finalName>${project.name}##${project.version}</finalName>
+	
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
