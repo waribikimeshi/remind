@@ -117,12 +117,10 @@
 
 		<!--spring security-->
 		<!-- これはログイン認証とかURLのファイアウォールとか401エラー発生するので機能開発とは別にした方がいいな-->
-		<!--			
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		-->
 
 	</dependencies>
 	
