@@ -117,6 +117,23 @@
 
 		<!--spring security-->
 		<!-- これはログイン認証とかURLのファイアウォールとか401エラー発生するので機能開発とは別にした方がいいな-->
+		<!--httpレスポンスヘッダに以下増える
+		X-Content-Type-Options: nosniff XSS攻撃軽減
+		X-XSS-Protection: 0 非推奨。現在のブラウザでは不要。
+		Cache-Control: no-cache, no-store, max-age=0, must-revalidate キャッシュしない
+		Pragma: no-cache キャッシュしない
+		Expires: 0 キャッシュしない
+		X-Frame-Options: DENY クリックジャンクション攻撃。<iframe> での埋め込みを拒否。
+		-->
+		<!--
+			XSS デフォルトでOK
+			Content Security Policy デフォルトなし
+			SQLインジャクション バインドさせてればOK
+			CSRF デフォルトでOK。POST、 PUT、 DELETE、 PATCH メソッドを使用した HTTP リクエストに対してのみ CSRF トークンチェックが行われます。
+			クリックジャッキング デフォルトでOK
+			セッションハイジャック tomcatが行うのでデフォルトでOK
+			HTTPヘッダインンジャクション デフォルトでOK
+		-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
