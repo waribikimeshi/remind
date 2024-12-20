@@ -105,7 +105,7 @@ public class AuthenticationRestController {
 	@ApiOperation(value = "認証マスタを１件検索する。")
 	@GetMapping(Consts.REST_URL_AUTHENTICATION_GET + Consts.REST_URL_PASSPARAMETER_ID)
 	@ResponseStatus(HttpStatus.OK)
-	public AuthenticationModel get(@PathVariable String id) throws Exception {
+	public AuthenticationModel get(@PathVariable Long id) throws Exception {
 		logger.info("get開始");
 
 		AuthenticationModel model = new AuthenticationModel();
@@ -211,7 +211,7 @@ public class AuthenticationRestController {
 	@ApiOperation(value = "認証マスタから削除する。")
 	@DeleteMapping(Consts.REST_URL_AUTHENTICATION_DELETE + Consts.REST_URL_PASSPARAMETER_ID)
 	@ResponseStatus(HttpStatus.OK)
-    public String delete(@PathVariable String id) throws Exception {
+    public String delete(@PathVariable Long id) throws Exception {
 		logger.info("delete開始");
 
 		AuthenticationModel model = new AuthenticationModel();

@@ -1,6 +1,7 @@
 package com.example.rest.model.table;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -27,7 +28,7 @@ public class AuthenticationModel implements Serializable  {
 
 	@NotNull(groups = {PUTRequired.class})
 	@ApiModelProperty(value = "主キー")
-	private String id;
+	private Long id;
 
 
 	@NotNull(groups = {POSTRequired.class,PUTRequired.class})
@@ -47,31 +48,31 @@ public class AuthenticationModel implements Serializable  {
 
 	@NotNull(groups = {POSTRequired.class,PUTRequired.class})
 	@ApiModelProperty(value = "アカウント有効期限")
-	private String expirationDate;
+	private java.sql.Date expirationDate;
 
 	@NotNull(groups = {POSTRequired.class,PUTRequired.class})
 	@ApiModelProperty(value = "アカウントロック")
-	private String lock;
+	private Boolean lock;
 
 	@NotNull(groups = {POSTRequired.class,PUTRequired.class})
 	@ApiModelProperty(value = "アカウント有効")
-	private String enabled;
+	private Boolean enabled;
 
 	
 	@NotNull(groups = {POSTRequired.class,PUTRequired.class,PATCHRequired.class})
 	@ApiModelProperty(value = "バージョン")
-	private String version;
+	private Long version;
 
 	@ApiModelProperty(value = "作成者")
 	private String createdUser;
 
 	@ApiModelProperty(value = "作成日時")
-	private String createDatetime;
+	private Timestamp createDatetime;
 
 	@ApiModelProperty(value = "最終更新者")
 	private String lastModifiedUser;
 
 	@ApiModelProperty(value = "最終更新日時")
-	private String lastModifiedDatetime;
+	private Timestamp lastModifiedDatetime;
 
 }

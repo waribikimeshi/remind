@@ -49,7 +49,7 @@ public class AuthenticationService {
 
 
 		//SQL検索
-		managedEntity = authenticationRepository.findById(Long.parseLong(model.getId()))
+		managedEntity = authenticationRepository.findById(model.getId())
 												//対象データなし
 												.orElseThrow(() -> new DataNotFoundException());
 
@@ -118,14 +118,14 @@ public class AuthenticationService {
 		AuthenticationModel result = new AuthenticationModel();
 
 		//SQL検索
-		AuthenticationEntity managedEntity = authenticationRepository.findById(Long.parseLong(model.getId()))
+		AuthenticationEntity managedEntity = authenticationRepository.findById(model.getId())
 										//対象データなし
 										.orElseThrow(() -> new DataNotFoundException());
 		//排他チェック
 		if(model.getVersion() == null
 			|| model.getVersion().equals("")
-			|| Long.parseLong(model.getVersion()) == managedEntity.getVersion() == false) {
-			throw new OptimisticLockingFailureException(model.getId());
+			|| model.getVersion() == managedEntity.getVersion() == false) {
+			throw new OptimisticLockingFailureException(Long.toString(model.getId()));
 		}
 
 		//modelからentityコピー。null値はコピー対象外
@@ -157,7 +157,7 @@ public class AuthenticationService {
 		boolean result = false;
 
 		//SQL検索
-		AuthenticationEntity managedEntity = authenticationRepository.findById(Long.parseLong(model.getId()))
+		AuthenticationEntity managedEntity = authenticationRepository.findById(model.getId())
 										//対象データなし
 										.orElseThrow(() -> new DataNotFoundException());
 
