@@ -14,11 +14,13 @@ public class WebSecurityConfig{
 
 
     /**
-     * 通すURL
+     * 通すURL。getはそのまま通るが、postはトークンないと403。
      */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(authz -> authz
+        http
+        	.csrf().disable()
+        	.authorizeHttpRequests(requests -> requests
                 .requestMatchers("/" + Consts.REST_URL_BASE + Consts.REST_URL_AUTHENTICATION + "/**").permitAll()
         );
         return http.build();
