@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -82,6 +83,7 @@ import io.swagger.annotations.ApiOperation;
  *
  *
  */
+@CrossOrigin(origins = Consts.SPA_CORS_ORGINS)
 @RestController
 @RequestMapping(Consts.REST_URL_BASE)
 public class AuthenticationRestController {

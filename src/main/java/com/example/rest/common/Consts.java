@@ -29,4 +29,10 @@ public class Consts {
     public static final String REST_URL_AUTHENTICATION_PATCH = REST_URL_AUTHENTICATION +  "/patch";
     public static final String REST_URL_AUTHENTICATION_DELETE = REST_URL_AUTHENTICATION +  "/delete";
 
+    
+	/******************************************************
+	 * SPA COR 許可
+	 ******************************************************/
+    public static final String SPA_CORS_ORGINS = "http://localhost:3000";
+
 }
