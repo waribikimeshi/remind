@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -73,20 +75,61 @@ public class ExceptionAOP {
     @ExceptionHandler({ OptimisticLockingFailureException.class })
     @ResponseBody
     public ExceptionResponseModel handleOptimisticLockingFailureException(OptimisticLockingFailureException exception) {
+    	logger.error(exception.toString());
 
-    	//TODO:
-//    	ExceptionResponseModel result =
-//    			new ExceptionResponseModel(
-//    					HttpStatus.CONFLICT.value()
-//    					,HttpStatus.CONFLICT.getReasonPhrase()
-//    					,exception.getMessageList());
-//
-//        return result;
-        
-        return new ExceptionResponseModel();
+    	ExceptionResponseModel result =
+    			new ExceptionResponseModel(
+    					HttpStatus.CONFLICT.value()
+    					,HttpStatus.CONFLICT.getReasonPhrase()
+    					,Arrays.asList(exception.toString()));
+
+        return result;
     }
     
+    /**
+     * ＤＢ定義制約エラー
+     * @param exception
+     * @return
+     */
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler({ DataIntegrityViolationException.class })
+    @ResponseBody
+    public ExceptionResponseModel handle404_3(DataIntegrityViolationException exception, Locale locale) {
+    	logger.error(exception.toString());
 
+
+    	ExceptionResponseModel result =
+    			new ExceptionResponseModel(
+    					HttpStatus.CONFLICT.value()
+    					,HttpStatus.CONFLICT.getReasonPhrase()
+    					,Arrays.asList(exception.toString()));
+    	
+        return result;
+    }
+
+
+    /**
+     * ＤＢアクセス例外
+     * @param exception
+     * @return
+     */
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler({ DataAccessException.class })
+    @ResponseBody
+    public ExceptionResponseModel handle500_1(DataAccessException exception, Locale locale) {
+    	logger.error(exception.toString());
+
+
+    	ExceptionResponseModel result =
+    			new ExceptionResponseModel(
+    					HttpStatus.INTERNAL_SERVER_ERROR.value()
+    					,HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()
+    					,Arrays.asList(exception.toString()));
+        return result;
+    }
+
+    
+    
     /**
      * 予期せぬ例外エラー
      * @param exception
